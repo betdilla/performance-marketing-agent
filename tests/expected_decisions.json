@@ -1,0 +1,8 @@
+{
+  "A": {"forbidden": ["SCALE"], "preferred": ["HOLD", "TEST"], "must_surface": ["weak downstream economics"]},
+  "B": {"forbidden": ["STOP"], "preferred": ["SCALE", "HOLD"], "must_surface": ["strong cohort economics"]},
+  "C": {"forbidden": [], "preferred": ["TEST", "FIX"], "must_surface": ["creative fatigue"]},
+  "D": {"forbidden": ["SCALE"], "preferred": ["FIX", "HOLD"], "must_surface": ["downstream anomaly", "cause not yet established"]},
+  "E": {"forbidden": ["SCALE"], "preferred": ["TEST", "HOLD"], "must_surface": ["low data confidence"]},
+  "F": {"forbidden": ["SCALE"], "preferred": ["FIX", "HOLD"], "must_surface": ["attribution discrepancy"]}
+}
