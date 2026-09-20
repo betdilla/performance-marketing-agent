@@ -1,5 +1,7 @@
 # Performance Marketing AI Agent
 
+[![CI](https://github.com/betdilla/performance-marketing-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/betdilla/performance-marketing-agent/actions/workflows/ci.yml)
+
 A reproducible, read-only workflow for diagnosing performance marketing data and producing evidence-based recommendations.
 
 This project formalizes part of a performance marketing methodology into an AI-assisted review workflow. It is an MVP for analysis and recommendation, not an autonomous media-buying system.
@@ -40,7 +42,13 @@ For the independent reviewer flow, see RUNBOOK.md.
 
 ## Run the AI layer
 
-Open the repository as a project in Cursor. Project-level instructions live in .cursor/rules/. Use prompts/daily_review.md with context/sample_client.md and the generated reports/normalized_review.md.
+Open the repository as a project in Cursor. Project-level instructions live in `.cursor/rules/*.mdc` and are configured as Always Apply rules. This is Cursor's current documented project-rules mechanism. Use `prompts/daily_review.md` with `context/sample_client.md` and the generated `reports/normalized_review.md`.
+
+After saving a model response to a Markdown file, validate its decision contract with:
+
+    python3 scripts/evaluate_ai_review.py path/to/ai-review.md
+
+The evaluator checks required fields, confidence vocabulary, forbidden decisions and benchmark concepts against `tests/expected_decisions.json`. It is a benchmark guardrail, not a semantic proof that every recommendation is correct.
 
 An illustrative expected-format report is in reports/example_daily_review.md. It is intentionally labeled as an example, not as proof of a specific model run.
 
