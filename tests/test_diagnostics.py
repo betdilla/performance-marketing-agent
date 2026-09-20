@@ -26,5 +26,19 @@ class BenchmarkDiagnosticsTest(unittest.TestCase):
     def test_e(self): self.assert_flag("E","LOW_DATA_CONFIDENCE")
     def test_f(self): self.assert_flag("F","ATTRIBUTION_DISCREPANCY")
 
+    def test_a_blocks_scale(self):
+        self.assertIn("SCALE",self.result("A")["blocked_decisions"])
+
+    def test_e_blocks_scale_and_does_not_overcall_attribution(self):
+        result=self.result("E")
+        self.assertIn("SCALE",result["blocked_decisions"])
+        self.assertNotIn("ATTRIBUTION_DISCREPANCY",result["flags"])
+
+    def test_f_blocks_scale_until_attribution_is_reconciled(self):
+        self.assertIn("SCALE",self.result("F")["blocked_decisions"])
+
+    def test_b_is_not_blocked_from_scale_by_nominal_cpa(self):
+        self.assertNotIn("SCALE",self.result("B")["blocked_decisions"])
+
 if __name__=="__main__":
     unittest.main()
