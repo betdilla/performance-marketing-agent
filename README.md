@@ -50,7 +50,9 @@ After saving a model response to a Markdown file, validate its decision contract
 
 The evaluator checks required fields, confidence vocabulary, forbidden decisions and benchmark concepts against `tests/expected_decisions.json`. It is a benchmark guardrail, not a semantic proof that every recommendation is correct.
 
-An illustrative expected-format report is in reports/example_daily_review.md. It is intentionally labeled as an example, not as proof of a specific model run.
+An illustrative expected-format report is in `reports/example_daily_review.md`. It is intentionally labeled as an example, not as proof of a specific model run.
+
+A verified end-to-end Cursor Agent benchmark run is documented in `reports/verified_cursor_run_2026-09-20.md`: the local deterministic suite passed 25/25 tests and the saved Cursor review passed the machine evaluator across Cases A-F with zero evaluator failures.
 
 ## Decision framework
 
