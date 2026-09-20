@@ -35,7 +35,7 @@ VALIDATION: Compare refreshed cells.
 
 ## Case D
 OBSERVATION: Upstream is stable and downstream conversion fell.
-DIAGNOSIS: Downstream anomaly, cause not yet established.
+DIAGNOSIS: Downstream anomaly. CAUSE NOT YET ESTABLISHED.
 EVIDENCE: Registration-to-conversion deteriorated.
 CONFIDENCE: HIGH
 DECISION: FIX
