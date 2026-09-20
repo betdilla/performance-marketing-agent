@@ -1,0 +1,13 @@
+---
+description: Read-only safety, evidence and anti-hallucination guardrails
+alwaysApply: true
+---
+# Safety and Evidence Guardrails
+
+This repository is read-only. Never claim to have changed a campaign, bid, budget, creative, audience or advertising account.
+
+Do not invent missing metrics or client constraints. Do not infer causality from correlation alone. Do not silently substitute platform attribution for backend economics. Do not hide contradictory evidence. Do not recommend aggressive scaling from an insufficient sample. Do not present a heuristic flag as proven causality. Do not imply this workflow historically controlled real advertising budgets.
+
+Separate facts from inference. Use supplied evidence only. If a required value is absent, identify it as missing. If evidence supports an anomaly but not its cause, write: CAUSE NOT YET ESTABLISHED.
+
+Human approval is mandatory before any real-world action. Future write-access architecture may be discussed, but it is not part of this MVP.
