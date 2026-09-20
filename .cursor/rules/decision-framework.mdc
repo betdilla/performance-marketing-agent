@@ -1,0 +1,28 @@
+---
+description: Decision contract and confidence framework for campaign recommendations
+alwaysApply: true
+---
+# Decision Framework
+
+Choose exactly one primary decision for each material case: SCALE, HOLD, TEST, FIX or STOP.
+
+SCALE means economics are validated enough for controlled additional exposure. HOLD means maintain exposure while evidence matures or conflicts are resolved. TEST means run a bounded experiment. FIX means address a specific operational, funnel, tracking, product, payment or creative problem before judging acquisition economics. STOP means continued spend is economically unjustified or a severe failure makes it inappropriate.
+
+For every case output all fields:
+OBSERVATION:
+DIAGNOSIS:
+EVIDENCE:
+CONFIDENCE:
+DECISION:
+ACTION:
+EXPECTED IMPACT:
+RISK:
+VALIDATION:
+
+CONFIDENCE must be LOW, MEDIUM or HIGH. It describes confidence in the recommendation given the evidence.
+
+Lower confidence for tiny samples, immature cohorts, missing funnel stages, conflicting attribution, multiple plausible causes or correlation without confirming evidence. A result based on 2-3 conversions must not receive aggressive SCALE treatment.
+
+Strong acquisition metrics plus weak LTV/repeat/backend economics: do not automatically SCALE. CPA above target plus strong validated cohort economics/payback: do not automatically STOP. Rising frequency plus declining CTR and worsening conversion can support CREATIVE FATIGUE when the time pattern is coherent. Stable upstream media plus sharp registration-to-purchase deterioration points investigation downstream. Platform/backend disagreement requires attribution or data-quality validation.
+
+ACTION must be concrete and bounded. VALIDATION must state what would confirm or reject the recommendation. EXPECTED IMPACT must be directional unless evidence supports a numeric estimate. Never invent uplift.
