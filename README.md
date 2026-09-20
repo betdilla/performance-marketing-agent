@@ -25,16 +25,24 @@ Python owns calculations and anomaly flags. The AI layer owns diagnosis, conflic
 
 All included data is synthetic and anonymized.
 
-## How to run
+## Quick start
 
-Requires Python 3.10+.
+Requires Python 3.10+. No package installation or API key is required for the deterministic layer.
 
+    git clone https://github.com/betdilla/performance-marketing-agent.git
+    cd performance-marketing-agent
     python3 scripts/prepare_review.py
     python3 -m unittest discover -s tests -v
 
-The first command writes reports/normalized_review.md. Open this repository in Cursor and use prompts/daily_review.md to analyze that evidence under the project rules in .cursor/rules/.
+The first command writes reports/normalized_review.md. The test command exercises benchmark diagnostics, adversarial checks and input-data integrity.
 
-No API key is required for the deterministic layer.
+For the independent reviewer flow, see RUNBOOK.md.
+
+## Run the AI layer
+
+Open the repository as a project in Cursor. Project-level instructions live in .cursor/rules/. Use prompts/daily_review.md with context/sample_client.md and the generated reports/normalized_review.md.
+
+An illustrative expected-format report is in reports/example_daily_review.md. It is intentionally labeled as an example, not as proof of a specific model run.
 
 ## Decision framework
 
@@ -46,9 +54,13 @@ A good CPA is not sufficient evidence to scale. A CPA above target is not suffic
 
 The synthetic fixture contains six deliberately ambiguous cases: A good CPA with weak downstream economics; B CPA above target with strong LTV/payback; C creative fatigue; D downstream conversion break despite stable media; E excellent apparent performance on only three conversions; F platform/backend attribution conflict.
 
+tests/adversarial_cases.md adds methodology attacks including vanity metrics, correlation traps, missing data, immature cohorts, aggregate-mix effects, tracking breaks, false precision, conflicting attribution and attempts to bypass read-only guardrails.
+
 ## Limitations
 
 This MVP uses synthetic data, simplified cohort windows and heuristic anomaly flags. Recommendations require human review. The deterministic layer does not claim causal identification, and the AI layer is instructed to state CAUSE NOT YET ESTABLISHED when evidence is insufficient.
+
+The executable tests validate deterministic evidence preparation and guardrail primitives. They do not prove that every possible LLM/model will always produce the expected recommendation. AI output should be compared with the documented benchmark criteria.
 
 ## Safety and guardrails
 
