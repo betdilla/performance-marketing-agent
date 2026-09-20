@@ -1,0 +1,7 @@
+case_id,conversions,repeat_rate,d30_backend_roas,d90_ltv,payback_days,registration_to_conversion_rate,prev_registration_to_conversion_rate,backend_attributed_revenue
+A,183,0.18,0.61,42,145,0.469,0.46,3460
+B,200,0.44,1.18,92,74,0.556,0.54,10148
+C,128,0.27,0.82,58,108,0.427,0.51,5248
+D,144,0.31,0.72,51,120,0.200,0.41,5184
+E,3,0.67,1.90,95,45,0.167,0.18,137
+F,125,0.32,0.76,55,116,0.417,0.42,3800
