@@ -44,7 +44,7 @@ class AIOutputEvaluatorTest(unittest.TestCase):
         self.assertTrue(any("exactly one primary decision" in x for x in result["failures"]))
 
     def test_missing_exact_uncertainty_phrase_fails(self):
-        bad=self.passing.replace("CAUSE NOT YET ESTABLISHED","Root cause is uncertain")
+        bad=self.passing.replace("CAUSE NOT YET ESTABLISHED","ROOT CAUSE IS UNCERTAIN")
         result=evaluate(bad,self.expected)
         self.assertFalse(result["passed"])
         self.assertTrue(any("required exact phrase" in x for x in result["failures"]))
