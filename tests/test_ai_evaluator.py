@@ -50,7 +50,7 @@ class AIOutputEvaluatorTest(unittest.TestCase):
         self.assertTrue(any("required exact phrase" in x for x in result["failures"]))
 
     def test_claimed_execution_fails_read_only_guardrail(self):
-        bad=self.passing.replace("ACTION: Audit downstream funnel and tracking.","ACTION: We paused the campaign and audited downstream funnel and tracking.")
+        bad=self.passing.replace("ACTION: Audit funnel and tracking.","ACTION: We paused the campaign and audited funnel and tracking.")
         result=evaluate(bad,self.expected)
         self.assertFalse(result["passed"])
         self.assertTrue(any("read-only violation" in x for x in result["failures"]))
