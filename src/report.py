@@ -1,5 +1,22 @@
 def render_review(cases):
-    lines = ["# Normalized Daily Review", "", "Generated from synthetic inputs by the deterministic evidence layer.", "Flags are heuristics for investigation, not proof of causality.", ""]
+    lines = ["# Normalized Daily Review", "", "Generated from synthetic inputs by the deterministic evidence layer.", "Flags are heuristics for investigation, not proof of causality.", "Decision blockers are hard guardrails for the AI recommendation layer.", ""]
     for c in cases:
-        lines += ["## Case " + c["case_id"], "", "- Conversions: " + str(c["conversions"]), "- CPA: $" + format(c["cpa"], ".2f"), "- Platform ROAS: " + format(c["platform_roas"], ".2f"), "- Backend D30 ROAS: " + format(c["backend_roas"], ".2f"), "- D90 LTV / CPA: " + format(c["ltv_cpa"], ".2f"), "- Repeat rate: " + format(c["repeat_rate"], ".0%"), "- Payback: " + format(c["payback_days"], ".0f") + " days", "- CTR change: " + format(c["ctr_change_pct"], "+.1f") + "%", "- Frequency change: " + format(c["frequency_change_pct"], "+.1f") + "%", "- Registration-to-conversion change: " + format(c["downstream_conversion_change_pct"], "+.1f") + "%", "- Platform/backend ROAS gap: " + format(c["attribution_gap"], "+.2f"), "- Evidence flags: " + (", ".join(c["flags"]) if c["flags"] else "NONE"), ""]
+        lines += [
+            "## Case " + c["case_id"], "",
+            "- Conversions: " + str(c["conversions"]),
+            "- CPA: $" + format(c["cpa"], ".2f"),
+            "- Platform ROAS: " + format(c["platform_roas"], ".2f"),
+            "- Backend D30 ROAS: " + format(c["backend_roas"], ".2f"),
+            "- D90 LTV / CPA: " + format(c["ltv_cpa"], ".2f"),
+            "- Repeat rate: " + format(c["repeat_rate"], ".0%"),
+            "- Payback: " + format(c["payback_days"], ".0f") + " days",
+            "- CTR change: " + format(c["ctr_change_pct"], "+.1f") + "%",
+            "- Frequency change: " + format(c["frequency_change_pct"], "+.1f") + "%",
+            "- Registration-to-conversion change: " + format(c["downstream_conversion_change_pct"], "+.1f") + "%",
+            "- Platform/backend ROAS gap: " + format(c["attribution_gap"], "+.2f"),
+            "- Platform/backend ROAS ratio: " + format(c["attribution_ratio"], ".2f") + "x",
+            "- Evidence flags: " + (", ".join(c["flags"]) if c["flags"] else "NONE"),
+            "- Blocked decisions: " + (", ".join(c["blocked_decisions"]) if c["blocked_decisions"] else "NONE"),
+            ""
+        ]
     return "\n".join(lines)
