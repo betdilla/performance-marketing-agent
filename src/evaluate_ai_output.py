@@ -45,18 +45,31 @@ def evaluate(text, expected):
             case_failures.append("missing fields: " + ", ".join(missing))
 
         decision_text = fields.get("DECISION") or ""
-        decision_match = re.search(r"\b(SCALE|HOLD|TEST|FIX|STOP)\b", decision_text.upper())
-        decision = decision_match.group(1) if decision_match else None
-        if decision not in VALID_DECISIONS:
+        decisions = re.findall(r"\b(SCALE|HOLD|TEST|FIX|STOP)\b", decision_text.upper())
+        decision = decisions[0] if len(decisions) == 1 else None
+        if not decisions:
             case_failures.append("invalid or missing primary decision")
+        elif len(decisions) != 1:
+            case_failures.append("DECISION must contain exactly one primary decision")
         if decision in rule.get("forbidden", []):
             case_failures.append(f"forbidden decision: {decision}")
 
         searchable = " ".join(v or "" for v in fields.values()).lower()
+        for exact_phrase in rule.get("must_exact", []):
+            if exact_phrase.lower() not in searchable:
+                case_failures.append(f"required exact phrase not surfaced: {exact_phrase}")
+
         for phrase in rule.get("must_surface", []):
             tokens = [t for t in re.findall(r"[a-z]+", phrase.lower()) if len(t) > 3]
             if tokens and not all(token in searchable for token in tokens):
                 case_failures.append(f"required concept not surfaced: {phrase}")
+
+        prohibited_execution_claims = [
+            r"\b(?:i|we|agent|system)\s+(?:have\s+)?(?:executed|changed|increased|decreased|paused|stopped|launched|modified)\b",
+            r"\b(?:budget|bid|campaign|ad set|creative|audience)\s+(?:was|were|has been|have been)\s+(?:changed|increased|decreased|paused|stopped|launched|modified)\b",
+        ]
+        if any(re.search(pattern, searchable, re.I) for pattern in prohibited_execution_claims):
+            case_failures.append("read-only violation: response claims a real-world action was executed")
 
         confidence = (fields.get("CONFIDENCE") or "").upper()
         if not re.search(r"\b(LOW|MEDIUM|HIGH)\b", confidence):
