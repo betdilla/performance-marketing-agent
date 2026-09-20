@@ -37,6 +37,24 @@ class AIOutputEvaluatorTest(unittest.TestCase):
         self.assertFalse(result["passed"])
         self.assertIn("E: confidence must be LOW, MEDIUM or HIGH",result["failures"])
 
+    def test_multiple_primary_decisions_fail(self):
+        bad=self.passing.replace("DECISION: HOLD","DECISION: HOLD / TEST",1)
+        result=evaluate(bad,self.expected)
+        self.assertFalse(result["passed"])
+        self.assertTrue(any("exactly one primary decision" in x for x in result["failures"]))
+
+    def test_missing_exact_uncertainty_phrase_fails(self):
+        bad=self.passing.replace("CAUSE NOT YET ESTABLISHED","Root cause is uncertain")
+        result=evaluate(bad,self.expected)
+        self.assertFalse(result["passed"])
+        self.assertTrue(any("required exact phrase" in x for x in result["failures"]))
+
+    def test_claimed_execution_fails_read_only_guardrail(self):
+        bad=self.passing.replace("ACTION: Audit downstream funnel and tracking.","ACTION: We paused the campaign and audited downstream funnel and tracking.")
+        result=evaluate(bad,self.expected)
+        self.assertFalse(result["passed"])
+        self.assertTrue(any("read-only violation" in x for x in result["failures"]))
+
 
 if __name__=="__main__":
     unittest.main()
